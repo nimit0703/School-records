@@ -1,7 +1,6 @@
 <template>
   <div class="container mt-5">
-    <b-form @submit="onSubmit" @reset="onReset" v-if="show">
-
+    <b-form @submit="onSubmit" v-if="show">
       <b-row class="my-1" v-for="(subject, index) in subjects" :key="index">
         <b-col sm="6">
           <label :for="`type-${subject}`">{{ subject }}:</label>
@@ -29,27 +28,42 @@
 
 <script>
 export default {
+  created() {
+    this.form.id = 1;
+    this.form.marks = {"Math": 0,
+      "Science": 0,
+      "English": 0,
+      "S.S": 0,
+      "Gujarati": 0,
+    };
+    this.subjects= ["Math", "Science", "English", "S.S", "Gujarati"];
+
+  },
+
   data() {
     return {
       form: {
-        name: "",
-        email: "",
-        marks: {}, // Create an object to store marks for each subject
+        id: 0,
+        marks: {},
       },
       show: true,
-      subjects: ['Math', 'Science', 'English', 'S.S', 'Gujarati'],
     };
   },
   methods: {
     onSubmit(event) {
       event.preventDefault();
+      const marksAsNumbers = {};
+      for (const subject in this.form.marks) {
+        marksAsNumbers[subject] = parseInt(this.form.marks[subject]);
+      }
+      this.$store.commit("setMarks", {
+        id: this.form.id,
+        marks: marksAsNumbers,
+      });
+      console.log(this.$store.state.thisStudent);
     },
     onReset(event) {
       event.preventDefault();
-      // Reset our form values
-      this.form.email = "";
-      this.form.name = "";
-      this.form.marks = {}; // Clear the marks
 
       this.$nextTick(() => {
         this.show = true;
@@ -61,9 +75,6 @@ export default {
     },
   },
   computed: {
-    nameState() {
-      return this.form.name.length > 3;
-    },
   },
 };
 </script>
