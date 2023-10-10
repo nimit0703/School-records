@@ -1,33 +1,6 @@
 <template>
-  <div class="container">
+  <div class="container mt-5">
     <b-form @submit="onSubmit" @reset="onReset" v-if="show">
-      <label for="input-live">Name:</label>
-      <b-form-input
-        id="input-live"
-        v-model="form.name"
-        :state="nameState"
-        aria-describedby="input-live-help input-live-feedback"
-        placeholder="Enter your name"
-        trim
-      ></b-form-input>
-      <b-form-invalid-feedback id="input-live-feedback">
-        Enter at least 3 letters
-      </b-form-invalid-feedback>
-
-      <b-form-group
-        id="input-group-1"
-        label="Email address:"
-        label-for="input-1"
-        description="We'll never share your email with anyone else."
-      >
-        <b-form-input
-          id="input-1"
-          v-model="form.email"
-          type="email"
-          placeholder="Enter email"
-          required
-        ></b-form-input>
-      </b-form-group>
 
       <b-row class="my-1" v-for="(subject, index) in subjects" :key="index">
         <b-col sm="6">
@@ -70,7 +43,6 @@ export default {
   methods: {
     onSubmit(event) {
       event.preventDefault();
-      alert(JSON.stringify(this.form));
     },
     onReset(event) {
       event.preventDefault();

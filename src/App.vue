@@ -1,8 +1,10 @@
 <template>
-  <div class="container">
+  <div class="">
     <template v-if="this.$store.state.isLogin">
-      <Nav class="my-2"></Nav>
-      <router-view></router-view>
+      <div class="d-flex align-items-stretch">
+        <Nav class="border-right hi-100 p-3 m-2"></Nav>
+        <router-view class="p-3"></router-view>
+      </div>
     </template>
     <template v-else>
       <Login />
@@ -15,7 +17,8 @@ import Form from "./components/Form.vue";
 import Nav from "./components/Nav.vue";
 
 import Login from "./components/Login.vue";
-// import {useState} from "./store/store"
+
+
 export default {
   data() {
     return {
@@ -34,3 +37,10 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.hi-100 {
+  height: 100vh;
+  /* width: 20%; */
+}
+</style>
