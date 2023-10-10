@@ -9,6 +9,7 @@ import StatsBySubjects from "@/views/StatsBySubjects.vue";
 Vue.use(VueRouter);
 
 const routes = [
+  { path: "/home", name: "home", component: Dashboard },
   { path: "/", name: "home", component: Dashboard },
   { path: "/add-data", name: "add-data", component: AddData },
   { path: "/by-marks", name: "by-marks", component: StatsByMarks },

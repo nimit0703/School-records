@@ -1,20 +1,23 @@
-import {createStore} from 'vuex';
+// store.js
+import Vue from 'vue';
+import Vuex from 'vuex';
 
-const store = createStore({
-    state: {
-      isOpen: false,
+Vue.use(Vuex);
+
+const store = new Vuex.Store({
+    state:{
+      isLogin:true,
+    },
+    mutations:{
+      logout(state){
+        state.isLogin = false;
+      },
+      login(state){
+        state.isLogin = true;
+      },
+
+    }
   
-    },
-    mutations: {
-      // Your mutations go here
-      
-    },
-    actions: {
-      // Your actions go here
-    },
-    getters: {
-     
-    },
-  });
-  
-  export default store;
+});
+
+export default store;

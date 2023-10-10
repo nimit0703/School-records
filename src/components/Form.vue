@@ -1,6 +1,19 @@
 <template>
   <div class="container">
     <b-form @submit="onSubmit" @reset="onReset" v-if="show">
+      <label for="input-live">Name:</label>
+      <b-form-input
+        id="input-live"
+        v-model="form.name"
+        :state="nameState"
+        aria-describedby="input-live-help input-live-feedback"
+        placeholder="Enter your name"
+        trim
+      ></b-form-input>
+      <b-form-invalid-feedback id="input-live-feedback">
+        Enter at least 3 letters
+      </b-form-invalid-feedback>
+
       <b-form-group
         id="input-group-1"
         label="Email address:"
@@ -16,39 +29,28 @@
         ></b-form-input>
       </b-form-group>
 
-      <b-form-group id="input-group-2" label="Your Name:" label-for="input-2">
-        <b-form-input
-          id="input-2"
-          v-model="form.name"
-          placeholder="Enter name"
-          required
-        ></b-form-input>
-      </b-form-group>
+      <b-row class="my-1" v-for="(subject, index) in subjects" :key="index">
+        <b-col sm="6">
+          <label :for="`type-${subject}`">{{ subject }}:</label>
+        </b-col>
+        <b-col sm="6">
+          <b-form-input
+            :id="`type-${subject}`"
+            v-model="form.marks[subject]"
+            type="number"
+            min="0"
+            max="100"
+            required
+          ></b-form-input>
+          <b-form-invalid-feedback v-if="!isMarksValid(subject)">
+            Marks must be between 0 and 100.
+          </b-form-invalid-feedback>
+        </b-col>
+      </b-row>
 
-      <b-form-group id="input-group-3" label="Food:" label-for="input-3">
-        <b-form-select
-          id="input-3"
-          v-model="form.food"
-          :options="foods"
-          required
-        ></b-form-select>
-      </b-form-group>
-
-      <b-form-group id="input-group-4" v-slot="{ ariaDescribedby }">
-        <b-form-checkbox-group
-          v-model="form.checked"
-          id="checkboxes-4"
-          :aria-describedby="ariaDescribedby"
-        >
-          <b-form-checkbox value="me">Check me out</b-form-checkbox>
-          <b-form-checkbox value="that">Check that out</b-form-checkbox>
-        </b-form-checkbox-group>
-      </b-form-group>
-
-      <b-button type="submit" variant="primary">Submit</b-button>
-      <b-button type="reset" variant="danger">Reset</b-button>
+      <b-button type="submit" variant="primary" class="m-1">Submit</b-button>
+      <b-button type="reset" variant="danger" class="m-1">Reset</b-button>
     </b-form>
-    
   </div>
 </template>
 
@@ -57,19 +59,12 @@ export default {
   data() {
     return {
       form: {
-        email: "",
         name: "",
-        food: null,
-        checked: [],
+        email: "",
+        marks: {}, // Create an object to store marks for each subject
       },
-      foods: [
-        { text: "Select One", value: null },
-        "Carrots",
-        "Beans",
-        "Tomatoes",
-        "Corn",
-      ],
       show: true,
+      subjects: ['Math', 'Science', 'English', 'S.S', 'Gujarati'],
     };
   },
   methods: {
@@ -82,13 +77,20 @@ export default {
       // Reset our form values
       this.form.email = "";
       this.form.name = "";
-      this.form.food = null;
-      this.form.checked = [];
-      // Trick to reset/clear native browser form validation state
-      this.show = false;
+      this.form.marks = {}; // Clear the marks
+
       this.$nextTick(() => {
         this.show = true;
       });
+    },
+    isMarksValid(subject) {
+      const marks = this.form.marks[subject];
+      return marks >= 0 && marks <= 100;
+    },
+  },
+  computed: {
+    nameState() {
+      return this.form.name.length > 3;
     },
   },
 };
