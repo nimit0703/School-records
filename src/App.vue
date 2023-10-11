@@ -7,7 +7,9 @@
       </div>
     </template>
     <template v-else>
-      <Login />
+      <div class="container " style="display: flex; align-items: center; justify-content: center; height: 100vh;">
+        <LoginPage />
+      </div>
     </template>
   </div>
 </template>
@@ -16,8 +18,7 @@
 import Form from "./components/Form.vue";
 import Nav from "./components/Nav.vue";
 
-import Login from "./components/Login.vue";
-
+import LoginPage from "./views/LoginPage.vue";
 
 export default {
   data() {
@@ -32,8 +33,8 @@ export default {
   },
   components: {
     Form,
-    Login,
     Nav,
+    LoginPage,
   },
 };
 </script>
