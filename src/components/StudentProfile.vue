@@ -31,7 +31,6 @@
 export default {
   data() {
     return {
-      // mainProps: { src:'https://cdn.pixabay.com/photo/2016/04/22/04/57/graduation-1345143_1280.png',blankColor: '#777', width: '125vw', height: '125vw', class: 'm1' }
     };
   },
   beforeCreate() {
