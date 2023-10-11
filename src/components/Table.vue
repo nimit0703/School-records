@@ -1,0 +1,54 @@
+<template>
+  <div>
+    <b-table
+      :items="items"
+      :fields="fields"
+      :tbody-tr-class="rowClass"
+    ></b-table>
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      fields: ["subject", "my_marks", "avg_marks", "mean", "max", "min"],
+      items: [],
+    };
+  },
+  created() {
+    const thisMarks = this.userData.marks;
+    let i = -1;
+    for (let sub in thisMarks) {
+      i++;
+      const my_marks = thisMarks[sub];
+      const matchingObject = this.alldata.find((obj) => obj.name === sub);
+
+      const avg_marks = matchingObject.avg;
+      const mean = matchingObject.mean;
+      const max = matchingObject.max;
+      const min = matchingObject.min;
+      const values = {
+        subject: sub,
+        my_marks,
+        avg_marks,
+        mean,
+        max,
+        min,
+      };
+      this.items.push(values);
+      console.log(values);
+    }
+  },
+  props: {
+    alldata: Array,
+    userData: Object,
+  },
+  methods: {
+    rowClass(item, type) {
+      if (!item || type !== "row") return;
+      if (item.status === "awesome") return "table-success";
+    },
+  },
+};
+</script>

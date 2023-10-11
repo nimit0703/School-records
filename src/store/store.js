@@ -60,6 +60,28 @@ const store = new Vuex.Store({
         };; 
       }
     },
+    getAverageScore: (state) => (subject) => {
+      const scores = state.allStudents.map((student) => student.marks[subject]);
+      return scores.reduce((total, score) => total + score, 0) / scores.length;
+    },
+    
+    // Calculate mean score for a subject
+    getMeanScore: (state) => (subject) => {
+      const scores = state.allStudents.map((student) => student.marks[subject]);
+      return scores.reduce((total, score) => total + score, 0) / scores.length;
+    },
+    
+    // Calculate maximum score for a subject
+    getMaxScore: (state) => (subject) => {
+      const scores = state.allStudents.map((student) => student.marks[subject]);
+      return Math.max(...scores);
+    },
+    
+    // Calculate minimum score for a subject
+    getMinScore: (state) => (subject) => {
+      const scores = state.allStudents.map((student) => student.marks[subject]);
+      return Math.min(...scores);
+    },
   },
 });
 

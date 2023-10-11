@@ -5,7 +5,7 @@
       <router-link to="add-data" tag="b-nav-item">Add Data</router-link>
       <b-nav-item-dropdown
         id="my-nav-dropdown"
-        text="Stats"
+        text="Compare"
         toggle-class="nav-link-custom"
         right
       >
