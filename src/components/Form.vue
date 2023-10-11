@@ -1,5 +1,6 @@
 <template>
   <div class="container mt-5">
+    <h6>Enrollment no: {{ form.id }}</h6>
     <b-form @submit="onSubmit" @reset="onReset" v-if="show">
       <b-row class="my-1" v-for="(subject, index) in subjects" :key="index">
         <b-col sm="6">
@@ -32,14 +33,11 @@
 <script>
 export default {
   created() {
-    this.form.id = 1;
-    this.form.marks = {
-      Math: 0,
-      Science: 0,
-      English: 0,
-      SS: 0,
-      Gujarati: 0,
-    };
+    this.form.id = this.getRandomNumber(30);
+    const marks = this.$store.getters.getMarksById(this.form.id);
+    this.form.marks =  marks;
+    console.log(this.form.id, marks);
+
     this.subjects = ["Math", "Science", "English", "SS", "Gujarati"];
   },
 
@@ -60,6 +58,10 @@ export default {
         marksAsNumbers[subject] = parseInt(this.form.marks[subject]);
       }
       this.$store.commit("setMarks", {
+        id: this.form.id,
+        marks: marksAsNumbers,
+      });
+      this.$store.commit("setStudent", {
         id: this.form.id,
         marks: marksAsNumbers,
       });
@@ -86,12 +88,12 @@ export default {
     autofill() {
       for (let sub of this.subjects) {
         console.log(sub);
-        this.form.marks[`${sub}`] = this.getRandomNumber();
+        this.form.marks[`${sub}`] = this.getRandomNumber(100);
       }
     },
-    getRandomNumber() {
+    getRandomNumber(max) {
       const random = Math.random();
-      const randomNumber = Math.floor(random * 101);
+      const randomNumber = Math.floor(random * (1+ max));
       return randomNumber;
     },
   },
