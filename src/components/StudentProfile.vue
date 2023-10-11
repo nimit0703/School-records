@@ -9,7 +9,7 @@
     <div class="d-flex-column justify-content-center mt-5 ml-3">
       <div class="d-flex my-2">
         <div class="profileData bg-light ">Name </div>
-        <span class="ml-3"> : Ronak J. Patel</span>
+        <span class="ml-3"> : {{userData.name}}</span>
       </div>
       <div class="d-flex my-2">
         <div class="profileData bg-light ">Enrollment No </div>
@@ -51,7 +51,7 @@ export default {
 <style scoped>
 .profileData {
   width: 10vw;
-  padding-left: 1px;
+  padding-left: 5px;
  
 }
 </style>

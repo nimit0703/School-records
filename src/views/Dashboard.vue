@@ -2,7 +2,7 @@
     <div class="mt-3">
         <div class="d-flex">
             <StudentData class="shadow-sm"></StudentData>
-            <StudentProfile class="ml-5 p-3 shadow-sm"></StudentProfile>
+            <StudentProfile class="ml-5 p-3 shadow-sm "></StudentProfile>
         </div>
     </div>
 </template>

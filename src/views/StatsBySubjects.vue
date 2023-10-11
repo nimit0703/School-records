@@ -2,9 +2,8 @@
   <div>
     <span>By Subjects </span>
     <div class="my-2">19041010{{ userData.id }}</div>
-    <hr />
     <div class="d-flex">
-      <div class="left border p-3 mr-3" style="width: 50vw; height: 50vh;">
+      <div class="left p-3 mr-3" style="width: 50vw; height: 0vh;">
         <Table :alldata="alldata" :userData="userData"></Table>
       </div>
       <div class="right border p-3" style="width: 30vw">

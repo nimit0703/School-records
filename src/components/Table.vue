@@ -46,8 +46,12 @@ export default {
   },
   methods: {
     rowClass(item, type) {
+      console.log("item", item, type);
       if (!item || type !== "row") return;
-      if (item.status === "awesome") return "table-success";
+      console.log("hey");
+      return {
+        "table-danger": item.my_marks < 30,
+      };
     },
   },
 };

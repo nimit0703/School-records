@@ -33,7 +33,6 @@
 <script>
 export default {
   created() {
-    this.form.id = this.getRandomNumber(30);
     const marks = this.$store.getters.getMarksById(this.form.id);
     this.form.marks =  marks;
     console.log(this.form.id, marks);
@@ -44,7 +43,7 @@ export default {
   data() {
     return {
       form: {
-        id: 0,
+        id: this.$store.state.thisStudent.id,
         marks: {},
       },
       show: true,
