@@ -268,6 +268,9 @@ export default {
     rowClass(item) {
       const per = this.$store.getters.getPercentageById(item.id);
       if (per < 35) {
+        if (item.id === this.$store.state.thisStudent.id) {
+          return "table-danger text-primary";
+        }
         return "table-danger";
       }
       if (per >= 90) {

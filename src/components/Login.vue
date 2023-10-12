@@ -59,6 +59,8 @@ export default {
           console.log(this.data);
           this.$store.commit("setThisStudent", [this.id, this.data]);
           this.$store.commit("login");
+          this.$router.push('/');
+
         });
       }
     },

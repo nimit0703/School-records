@@ -1,25 +1,25 @@
 <template>
-  <div class="">
-    <template v-if="this.$store.state.isLogin">
+  <div>
+    <template v-if="$store.state.isLogin">
       <div class="d-flex align-items-stretch">
         <Nav class="border-right hi-100 p-3 m-2"></Nav>
-        <router-view class="p-3"></router-view>
+        <router-view class="p-3 flex-grow-1"></router-view>
         <Spinner v-show="this.$store.state.showSpinner"></Spinner>
       </div>
     </template>
     <template v-else>
-      <div class="container " style="display: flex; align-items: center; justify-content: center; height: 100vh;">
-        <LoginPage />
+      <div
+        class="container d-flex align-items-center justify-content-center hi-100"
+      >
+        <LoginPage></LoginPage>
       </div>
     </template>
   </div>
 </template>
 
 <script>
-import Form from "./components/Form.vue";
 import Nav from "./components/Nav.vue";
 import Spinner from "./components/Spinner.vue";
-
 import LoginPage from "./views/LoginPage.vue";
 
 export default {
@@ -34,10 +34,9 @@ export default {
     },
   },
   components: {
-    Form,
     Nav,
     LoginPage,
-    Spinner
+    Spinner,
   },
 };
 </script>
@@ -47,6 +46,4 @@ export default {
   height: 100vh;
   /* width: 20%; */
 }
-
-
 </style>
