@@ -4,7 +4,7 @@
       <div class="d-flex align-items-stretch">
         <Nav class="border-right hi-100 p-3 m-2"></Nav>
         <router-view class="p-3"></router-view>
-        <Spinner class="spinner" v-show="this.$store.state.showSpinner"></Spinner>
+        <Spinner v-show="this.$store.state.showSpinner"></Spinner>
       </div>
     </template>
     <template v-else>
@@ -48,8 +48,5 @@ export default {
   /* width: 20%; */
 }
 
-.spinner{
-  position: absolute;
-  margin: 25% 50%;
-}
+
 </style>
