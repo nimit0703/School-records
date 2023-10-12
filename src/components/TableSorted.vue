@@ -113,7 +113,7 @@
           class="my-0"
         ></b-pagination>
       </b-col>
-      <b-col sm="3" md="4" class="ml-5 my-2" style="opacity: 0.9;">
+      <b-col sm="3" md="4" class="ml-5 my-2" style="opacity: 0.9">
         <span class="bg-danger pl-3 pr-3 border text-white ml-2">Fail</span>
         <span class="bg-success pl-3 pr-3 border text-white ml-2">Topper</span>
         <span class="bg-primary pl-3 pr-3 border text-white ml-2">You</span>
@@ -138,8 +138,7 @@
       class="mt-4"
     >
       <template #cell(name)="row">
-        {{ row.value }}       
-
+        {{ row.value }}
       </template>
       <template #cell(actions)="row">
         <b-button
@@ -223,8 +222,8 @@ export default {
       ],
       totalRows: 1,
       currentPage: 1,
-      perPage: 6,
-      pageOptions: [5, 10, 15, { value: 100, text: "Show a lot" }],
+      perPage: 2,
+      pageOptions: [5, 10, 15, { value: 100, text: "100 rows" }],
       sortBy: "",
       sortDesc: false,
       sortDirection: "asc",
@@ -237,6 +236,24 @@ export default {
       },
     };
   },
+  beforeMount() {
+    this.perPage = 5;
+    this.sortBy = "id";
+    this.sortDirection = "asc";
+  },
+
+  beforeCreate() {
+    /*
+     * setting this values for correct pagination
+     * paggination require two values
+     * 1.)number of rows and
+     * 2.) rows per page
+     * to have correct paginations
+     */
+    setTimeout(() => {
+      this.totalRows = this.items.length;
+    }, 5000);
+  },
   computed: {
     sortOptions() {
       // Create an options list from our fields
@@ -247,25 +264,20 @@ export default {
         });
     },
   },
-  mounted() {
-    // Set the initial number of items
-    this.totalRows = this.items.length;
-  },
   methods: {
     rowClass(item) {
       const per = this.$store.getters.getPercentageById(item.id);
-      console.log("per",per)
-      if(per<35){
-        return "table-danger"
+      if (per < 35) {
+        return "table-danger";
       }
-      if(per>=90){
+      if (per >= 90) {
         if (item.id === this.$store.state.thisStudent.id) {
-        return "table-success text-primary"; 
-      }
-        return "table-success"
+          return "table-success text-primary";
+        }
+        return "table-success";
       }
       if (item.id === this.$store.state.thisStudent.id) {
-        return "table-primary"; 
+        return "table-primary";
       }
       return "";
     },

@@ -57,5 +57,13 @@ export default {
       console.log(values);
     }
   },
+  beforeDestroy() {
+    console.log("bySubject before destroy", )
+    this.$store.state.showSpinner = true;
+
+    setTimeout(() => {
+      this.$store.state.showSpinner = false;
+    },700);
+  },
 };
 </script>

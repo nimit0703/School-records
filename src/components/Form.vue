@@ -60,7 +60,7 @@ export default {
   beforeUpdate() {
     for (const subject in this.form.marks) {
       if (!this.isMarksValid(subject)) {
-        console.error(
+        console.warn(
           `Invalid data for ${subject}: ${this.form.marks[subject]}`
         );
         this.erroLogInvalidMark = true;

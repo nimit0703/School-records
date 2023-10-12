@@ -10,6 +10,7 @@ const storedAllStudents = JSON.parse(localStorage.getItem("allStudents")) || [];
 
 const store = new Vuex.Store({
   state: {
+    showSpinner:false,
     isLogin: isLogin,
     thisStudent: storedThisStudent,
     allStudents: storedAllStudents,

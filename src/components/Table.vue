@@ -46,9 +46,7 @@ export default {
   },
   methods: {
     rowClass(item, type) {
-      console.log("item", item, type);
       if (!item || type !== "row") return;
-      console.log("hey");
       return {
         "table-danger": item.my_marks < 30,
       };
