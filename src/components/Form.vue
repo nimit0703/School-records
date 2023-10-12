@@ -1,7 +1,7 @@
 <template>
   <div class="container mt-5">
     <h6>Enrollment no: {{ form.id }}</h6>
-    <b-form @submit="onSubmit" @reset="onReset" v-if="show">
+    <b-form @submit="onSubmit" v-if="show">
       <b-row class="my-1" v-for="(subject, index) in subjects" :key="index">
         <b-col sm="6">
           <label :for="`type-${subject}`">{{ subject }}:</label>
@@ -14,6 +14,7 @@
             min="0"
             max="100"
             required
+            :disabled="!isEditing"
           ></b-form-input>
           <b-form-invalid-feedback v-if="!isMarksValid(subject)">
             Marks must be between 0 and 100.
@@ -21,11 +22,17 @@
         </b-col>
       </b-row>
 
-      <b-button type="" variant="success" class="m-1" @click.prevent="autofill"
+      <b-button type="button" variant="success" class="m-1" @click="autofill"
         >Autofill</b-button
       >
       <b-button type="submit" variant="primary" class="m-1">Submit</b-button>
-      <b-button type="reset" variant="danger" class="m-1">Reset</b-button>
+      <b-button
+        type="button"
+        variant="danger"
+        class="m-1"
+        @click="toggleEditing"
+        >Update</b-button
+      >
     </b-form>
   </div>
 </template>
@@ -34,7 +41,7 @@
 export default {
   created() {
     const marks = this.$store.getters.getMarksById(this.form.id);
-    this.form.marks =  marks;
+    this.form.marks = marks;
     console.log(this.form.id, marks);
 
     this.subjects = ["Math", "Science", "English", "SS", "Gujarati"];
@@ -42,6 +49,7 @@ export default {
 
   data() {
     return {
+      isEditing:false,
       form: {
         id: this.$store.state.thisStudent.id,
         marks: {},
@@ -50,6 +58,9 @@ export default {
     };
   },
   methods: {
+    toggleEditing() {
+      this.isEditing = !this.isEditing;
+    },
     onSubmit(event) {
       event.preventDefault();
       const marksAsNumbers = {};
@@ -67,32 +78,21 @@ export default {
       console.log(this.$store.state.thisStudent);
       this.onReset(event);
     },
-    onReset(event) {
-      event.preventDefault();
-      this.form.marks = {
-        Math: 0,
-        Science: 0,
-        English: 0,
-        SS: 0,
-        Gujarati: 0,
-      };
-      this.$nextTick(() => {
-        this.show = true;
-      });
-    },
     isMarksValid(subject) {
       const marks = this.form.marks[subject];
       return marks >= 0 && marks <= 100;
     },
     autofill() {
+      if(!this.isEditing){
+        return;
+      }
       for (let sub of this.subjects) {
-        console.log(sub);
         this.form.marks[`${sub}`] = this.getRandomNumber(100);
       }
     },
     getRandomNumber(max) {
       const random = Math.random();
-      const randomNumber = Math.floor(random * (1+ max));
+      const randomNumber = Math.floor(random * (1 + max));
       return randomNumber;
     },
   },

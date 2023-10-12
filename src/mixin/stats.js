@@ -30,8 +30,10 @@ export default {
 
       // Calculate average marks and percentage
       const numSubjects = Object.keys(scores).length;
-      const averageMarks = totalMarks / numSubjects;
-      const percentage = (totalMarks / (numSubjects * 100)) * 100;
+      const averageMarks = (totalMarks / numSubjects).toFixed(2);
+      const percentage = ((totalMarks / (numSubjects * 100)) * 100).toFixed(2);
+
+      console.log(averageMarks,percentage)
 
       // Populate the report object
       report["Average Marks"] = averageMarks;

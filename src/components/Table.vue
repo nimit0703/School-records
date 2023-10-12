@@ -24,8 +24,8 @@ export default {
       const my_marks = thisMarks[sub];
       const matchingObject = this.alldata.find((obj) => obj.name === sub);
 
-      const avg_marks = matchingObject.avg;
-      const mean = matchingObject.mean;
+      const avg_marks = matchingObject.avg.toFixed(2);
+      const mean = matchingObject.mean.toFixed(2);
       const max = matchingObject.max;
       const min = matchingObject.min;
       const values = {
