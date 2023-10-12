@@ -106,6 +106,19 @@ const store = new Vuex.Store({
       const scores = state.allStudents.map((student) => student.marks[subject]);
       return Math.min(...scores);
     },
+    
+    // Calculate % score for a student
+    getPercentageById: (state) => (id) => {
+      const student = state.allStudents.find((student) => student.id === id);
+    
+      if (student) {
+        const totalMarks = student.marks.Math + student.marks.Science + student.marks.English + student.marks.SS + student.marks.Gujarati;
+        const percentage = (totalMarks / 500) * 100; // Assuming the total marks for all subjects is 500
+        return percentage;
+      } else {
+        return 0; // You can return 0 or any other default value for students who are not found
+      }
+    },
   },
 });
 
