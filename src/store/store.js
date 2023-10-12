@@ -45,7 +45,8 @@ const store = new Vuex.Store({
       }
       localStorage.setItem("allStudents", JSON.stringify(state.allStudents));
     },
-    setThisStudent(state, id) {
+    setThisStudent(state, [id,data]) {
+      console.log("in",data);
       const existingStudent = state.allStudents.find(
         (student) => student.id === id
         );
@@ -54,19 +55,25 @@ const store = new Vuex.Store({
         } else {
         const marks = {
           Math: 0,
-          Science: 0,
-          English: 0,
-          SS: 0,
-          Gujarati: 0,
+          Compiler: 0,
+          EngineeringGraphics: 0,
+          DBMS: 0,
+          SoftwareEngineering: 0,
         }
         state.thisStudent = {
           id,
-          name: `student ${id}`,
+          name:data.name,
+          img:data.thumbnail,
+          email:data.email,
+          gender:data.gender, 
           marks,
         };
+        state.allStudents.push(state.thisStudent)
+        localStorage.setItem("allStudents", JSON.stringify(state.allStudents));
       }
       localStorage.setItem("thisStudent", JSON.stringify(state.thisStudent));
     },
+    
   },
   getters: {
     getMarksById: (state) => (id) => {
@@ -77,10 +84,10 @@ const store = new Vuex.Store({
       } else {
         return {
           Math: 0,
-          Science: 0,
-          English: 0,
-          SS: 0,
-          Gujarati: 0,
+          Compiler: 0,
+          EngineeringGraphics: 0,
+          DBMS: 0,
+          SoftwareEngineering: 0,
         };
       }
     },
@@ -112,7 +119,7 @@ const store = new Vuex.Store({
       const student = state.allStudents.find((student) => student.id === id);
     
       if (student) {
-        const totalMarks = student.marks.Math + student.marks.Science + student.marks.English + student.marks.SS + student.marks.Gujarati;
+        const totalMarks = student.marks.Math + student.marks.Compiler + student.marks.EngineeringGraphics + student.marks.DBMS + student.marks.SoftwareEngineering;
         const percentage = (totalMarks / 500) * 100; // Assuming the total marks for all subjects is 500
         return percentage;
       } else {

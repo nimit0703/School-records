@@ -1,10 +1,10 @@
 <template>
-  <div class="border p-3" style="width: 50vw; height: 85vh">
+  <div class="border p-3" style="width: 48vw; height: 85vh">
     <h5 class="text-success">Your Score</h5>
     <div
       v-for="(mark, sub) of marks"
       class="d-flex border my-1"
-      style="width: 25vw"
+      style="width: 35vw"
     >
       <div class="text-center mr-2 bg-light" style="width: 15vw">{{ sub }}</div>
       <div
@@ -19,10 +19,10 @@
     <div
       v-for="(mark, sub) of report"
       class="d-flex border my-1"
-      style="width: 25vw"
+      style="width: 35vw"
     >
       <div class="text-center mr-2 bg-light" style="width: 15vw">{{ sub }}</div>
-      <div class="text-center my-1 mr-2" style="width: 10vw">{{ mark }}</div>
+      <div class="text-center my-1 mr-2" style="width: 15vw">{{ mark }}</div>
     </div>
   </div>
 </template>

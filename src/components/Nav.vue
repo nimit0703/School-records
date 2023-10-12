@@ -1,7 +1,7 @@
 <template >
   <div class="nav-wrapper">
     <b-nav vertical class="w-20">
-      <router-link to="/" tag="b-nav-item" exact>Dashboard</router-link>
+      <router-link to="/" tag="b-nav-item" exact-active-class="active">Dashboard</router-link>
       <router-link to="add-data" tag="b-nav-item">Add Data</router-link>
       <b-nav-item-dropdown
         id="my-nav-dropdown"
@@ -28,5 +28,7 @@ export default {
   },
 };
 </script>
+
+
 
 

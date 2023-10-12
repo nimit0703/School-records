@@ -3,7 +3,7 @@
     <h6>Enrollment no: {{ form.id }}</h6>
     <b-form @submit="onSubmit" v-if="show">
       <b-row class="my-1" v-for="(subject, index) in subjects" :key="index">
-        <b-col sm="6">
+        <b-col sm="5" class="mr-4">
           <label :for="`type-${subject}`">{{ subject }}:</label>
         </b-col>
         <b-col sm="6">
@@ -44,7 +44,7 @@ export default {
     this.form.marks = marks;
     console.log(this.form.id, marks);
 
-    this.subjects = ["Math", "Science", "English", "SS", "Gujarati"];
+    this.subjects = ["Math", "Compiler", "EngineeringGraphics", "DBMS", "SoftwareEngineering"];
   },
 
   data() {

@@ -135,7 +135,7 @@
       small
       @filtered="onFiltered"
       :tbody-tr-class="rowClass"
-
+      class="mt-4"
     >
       <template #cell(name)="row">
         {{ row.value }}       
@@ -196,8 +196,8 @@ export default {
           class: "desc",
         },
         {
-          key: "marks.English",
-          label: "English",
+          key: "marks.EngineeringGraphics",
+          label: "EngineeringGraphics",
           sortable: true,
         },
         {
@@ -206,18 +206,18 @@ export default {
           sortable: true,
         },
         {
-          key: "marks.Science",
-          label: "science",
+          key: "marks.Compiler",
+          label: "Compiler",
           sortable: true,
         },
         {
-          key: "marks.SS",
-          label: "SS",
+          key: "marks.DBMS",
+          label: "DBMS",
           sortable: true,
         },
         {
-          key: "marks.Gujarati",
-          label: "Gujarati",
+          key: "marks.SoftwareEngineering",
+          label: "SoftwareEngineering",
           sortable: true,
         },
       ],
