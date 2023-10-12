@@ -11,12 +11,10 @@
             :id="`type-${subject}`"
             v-model="form.marks[subject]"
             type="number"
-            min="0"
-            max="100"
             required
             :disabled="!isEditing"
           ></b-form-input>
-          <b-form-invalid-feedback v-if="!isMarksValid(subject)">
+          <b-form-invalid-feedback v-if="erroLogInvalidMark">
             Marks must be between 0 and 100.
           </b-form-invalid-feedback>
         </b-col>
@@ -25,7 +23,14 @@
       <b-button type="button" variant="success" class="m-1" @click="autofill"
         >Autofill</b-button
       >
-      <b-button type="submit" variant="primary" class="m-1">Submit</b-button>
+      <b-button
+        type="submit"
+        variant="primary"
+        class="m-1"
+        :disabled="hasInvalidMarks"
+      >
+        Submit
+      </b-button>
       <b-button
         type="button"
         variant="danger"
@@ -44,12 +49,45 @@ export default {
     this.form.marks = marks;
     console.log(this.form.id, marks);
 
-    this.subjects = ["Math", "Compiler", "EngineeringGraphics", "DBMS", "SoftwareEngineering"];
+    this.subjects = [
+      "Math",
+      "Compiler",
+      "EngineeringGraphics",
+      "DBMS",
+      "SoftwareEngineering",
+    ];
+  },
+  beforeUpdate() {
+    for (const subject in this.form.marks) {
+      if (!this.isMarksValid(subject)) {
+        console.error(
+          `Invalid data for ${subject}: ${this.form.marks[subject]}`
+        );
+        this.erroLogInvalidMark = true;
+        const ele = document.getElementById(`type-${subject}`);
+        ele.classList.add("border-danger");
+      } else {
+        const ele = document.getElementById(`type-${subject}`);
+        ele.classList.remove("border-danger");
+      }
+    }
+  },
+
+  computed: {
+    hasInvalidMarks() {
+      for (const subject in this.form.marks) {
+        if (!this.isMarksValid(subject)) {
+          return true; // Disable the "Submit" button if there are invalid marks
+        }
+      }
+      return false; // Enable the "Submit" button if all marks are valid
+    },
   },
 
   data() {
     return {
-      isEditing:false,
+      erroLogInvalidMark: false,
+      isEditing: false,
       form: {
         id: this.$store.state.thisStudent.id,
         marks: {},
@@ -62,6 +100,9 @@ export default {
       this.isEditing = !this.isEditing;
     },
     onSubmit(event) {
+      if (this.hasInvalidMarks) {
+        return; // Prevent form submission if there are invalid marks
+      }
       event.preventDefault();
       const marksAsNumbers = {};
       for (const subject in this.form.marks) {
@@ -76,14 +117,14 @@ export default {
         marks: marksAsNumbers,
       });
       console.log(this.$store.state.thisStudent);
-      this.onReset(event);
+      this.isEditing = !this.isEditing;
     },
     isMarksValid(subject) {
       const marks = this.form.marks[subject];
       return marks >= 0 && marks <= 100;
     },
     autofill() {
-      if(!this.isEditing){
+      if (!this.isEditing) {
         return;
       }
       for (let sub of this.subjects) {

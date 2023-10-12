@@ -1,5 +1,5 @@
 <template>
-  <div class="border p-3" style="width: 48vw; height: 85vh">
+  <div class="border p-3" style="width: 48vw; height: 95vh">
     <h5 class="text-success">Your Score</h5>
     <div
       v-for="(mark, sub) of marks"
