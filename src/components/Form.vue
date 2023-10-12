@@ -65,10 +65,27 @@ export default {
         );
         this.erroLogInvalidMark = true;
         const ele = document.getElementById(`type-${subject}`);
+        ele.classList.add("shake-animation");
+        ele.classList.add("text-danger");
         ele.classList.add("border-danger");
-      } else {
+        setTimeout(() => {
+          ele.classList.remove("shake-animation");
+        }, 2000);
+      }
+    }
+  },
+  updated() {
+    for (const subject in this.form.marks) {
+      if (this.isMarksValid(subject)) {
+        this.erroLogInvalidMark = true;
         const ele = document.getElementById(`type-${subject}`);
+        ele.classList.remove("text-danger");
         ele.classList.remove("border-danger");
+        ele.classList.add("border-success");
+        setTimeout(() => {
+          ele.classList.remove("border-success");
+          ele.classList.remove("shake-animation");
+        }, 500);
       }
     }
   },
@@ -139,3 +156,26 @@ export default {
   },
 };
 </script>
+<style scoped>
+.shake-animation {
+  animation: shake 0.5s;
+}
+
+@keyframes shake {
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px);
+  }
+  50% {
+    transform: translateX(5px);
+  }
+  75% {
+    transform: translateX(-5px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+</style>
