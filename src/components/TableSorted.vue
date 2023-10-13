@@ -242,7 +242,7 @@ export default {
     this.sortDirection = "asc";
   },
 
-  beforeCreate() {
+  mounted() {
     /*
      * setting this values for correct pagination
      * paggination require two values
@@ -250,9 +250,7 @@ export default {
      * 2.) rows per page
      * to have correct paginations
      */
-    setTimeout(() => {
-      this.totalRows = this.items.length;
-    }, 5000);
+    this.totalRows = this.items.length;
   },
   computed: {
     sortOptions() {

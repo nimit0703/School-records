@@ -72,4 +72,7 @@ export default {
   transform: translateY(100%);
   opacity: 0;
 }
+.nav-wrapper{
+  min-height: 100vh;
+}
 </style>

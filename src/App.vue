@@ -2,7 +2,7 @@
   <div>
     <template v-if="$store.state.isLogin">
       <div class="d-flex align-items-stretch">
-        <Nav class="border-right hi-100 p-3 m-2"></Nav>
+        <Nav class="border-right p-3 m-2"></Nav>
         <router-view class="p-3 flex-grow-1"></router-view>
         <Spinner v-show="this.$store.state.showSpinner"></Spinner>
       </div>
