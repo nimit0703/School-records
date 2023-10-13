@@ -4,7 +4,7 @@
       <router-link to="/" tag="b-nav-item" exact-active-class="active"
         >Dashboard</router-link
       >
-      <router-link to="add-data" tag="b-nav-item">Add Data</router-link>
+      <router-link to="add-data" tag="b-nav-item">Edit Marks</router-link>
       <b-nav-item-dropdown
         id="my-nav-dropdown"
         text="Compare"

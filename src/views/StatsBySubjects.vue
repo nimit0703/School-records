@@ -58,7 +58,7 @@ export default {
     }
   },
   beforeDestroy() {
-    console.log("bySubject before destroy", )
+    console.log("beforeDestroyy :: bySubjects")
     this.$store.state.showSpinner = true;
 
     setTimeout(() => {

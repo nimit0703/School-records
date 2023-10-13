@@ -12,7 +12,7 @@ export default {
     Form,
   },
   beforeDestroy() {
-    console.log("bySubject before destroy");
+    console.log("beforeDestroyy :: AddData")
     this.$store.state.showSpinner = true;
 
     setTimeout(() => {

@@ -19,8 +19,8 @@ export default {
     };
   },
   beforeDestroy() {
+    console.log("beforeDestroyy :: byMarks")
     this.$store.state.showSpinner = true;
-    
     setTimeout(() => {
       this.$store.state.showSpinner = false;
     },700);

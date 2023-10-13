@@ -1,6 +1,17 @@
 <template>
   <div class="container mt-5">
     <h6>Enrollment no: {{ form.id }}</h6>
+    <div>
+      <b-alert
+        :show="dismissCountDown"
+        dismissible
+        :variant="alertClass"
+        @dismissed="dismissCountDown = 0"
+        @dismiss-count-down="countDownChanged"
+      >
+        {{ alertmsg }}
+      </b-alert>
+    </div>
     <b-form @submit="onSubmit" v-if="show">
       <b-row class="my-1" v-for="(subject, index) in subjects" :key="index">
         <b-col sm="5" class="mr-4">
@@ -63,6 +74,7 @@ export default {
         console.warn(
           `Invalid data for ${subject}: ${this.form.marks[subject]}`
         );
+
         this.erroLogInvalidMark = true;
         const ele = document.getElementById(`type-${subject}`);
         ele.classList.add("shake-animation");
@@ -71,6 +83,9 @@ export default {
         setTimeout(() => {
           ele.classList.remove("shake-animation");
         }, 2000);
+        this.alertClass = "danger";
+        this.alertmsg = "Invalid marks";
+        this.showAlert();
       }
     }
   },
@@ -109,7 +124,11 @@ export default {
         id: this.$store.state.thisStudent.id,
         marks: {},
       },
+      dismissSecs: 3,
+      dismissCountDown: 0,
       show: true,
+      alertClass: "success",
+      alertmsg: "",
     };
   },
   methods: {
@@ -133,7 +152,10 @@ export default {
         id: this.form.id,
         marks: marksAsNumbers,
       });
-      console.log(this.$store.state.thisStudent);
+      console.log("", this.$store.state.thisStudent);
+      this.alertClass = "success";
+      this.alertmsg = "Your data saved successfully";
+      this.showAlert();
       this.isEditing = !this.isEditing;
     },
     isMarksValid(subject) {
@@ -152,6 +174,12 @@ export default {
       const random = Math.random();
       const randomNumber = Math.floor(random * (1 + max));
       return randomNumber;
+    },
+    countDownChanged(dismissCountDown) {
+      this.dismissCountDown = dismissCountDown;
+    },
+    showAlert() {
+      this.dismissCountDown = this.dismissSecs;
     },
   },
 };

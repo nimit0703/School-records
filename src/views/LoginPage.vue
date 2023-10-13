@@ -10,7 +10,7 @@ export default{
         Login,
     },
     beforeDestroy() {
-    console.log("bySubject before destroy", )
+      console.log("beforeDestroyy :: LoginPage")
     this.$store.state.showSpinner = true;
 
     setTimeout(() => {

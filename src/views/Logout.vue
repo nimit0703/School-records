@@ -14,7 +14,7 @@ export default {
     }, 700);
   },
   beforeDestroy() {
-    console.log("Logout before destroy");
+    console.log("beforeDestroy :: Logout");
   },
   destroyed(){
     console.log("logout distroyed")

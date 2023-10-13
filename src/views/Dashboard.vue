@@ -16,13 +16,13 @@ export default {
     StudentProfile,
   },
   mounted() {
-    console.log("mounted");
+    console.log("mounted :: Dashboard")
     this.$store.state.timer = setInterval(() => {
       this.$store.commit("updateTime");
     }, 1000*60);
   },
   beforeDestroy() {
-    console.log("bySubject before destroy");
+    console.log("beforeDestroyy :: DashBoard")
     this.$store.state.showSpinner = true;
 
     setTimeout(() => {
