@@ -6,6 +6,7 @@ import LoginPage from "@/views/LoginPage.vue";
 // import Stats from '@/views/Stats.vue';
 import StatsByMarks from "@/views/StatsByMarks.vue";
 import StatsBySubjects from "@/views/StatsBySubjects.vue";
+import Logout from '@/views/Logout.vue';
 
 Vue.use(VueRouter);
 
@@ -15,6 +16,7 @@ const routes = [
   { path: "/add-data", name: "add-data", component: AddData },
   { path: "/by-marks", name: "by-marks", component: StatsByMarks },
   { path: "/by-subjects", name: "by-subjects", component: StatsBySubjects },
+  { path: "/logout", name: "logout", component: Logout },
   // Define more routes as needed
 ];
 

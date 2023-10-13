@@ -25,6 +25,7 @@ import LoginPage from "./views/LoginPage.vue";
 export default {
   data() {
     return {
+      timer: null,
       isLogin: this.$store.state.isLogin,
     };
   },
@@ -38,6 +39,8 @@ export default {
     LoginPage,
     Spinner,
   },
+  methods: {},
+  
 };
 </script>
 

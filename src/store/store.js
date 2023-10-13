@@ -11,6 +11,8 @@ const storedAllStudents = JSON.parse(localStorage.getItem("allStudents")) || [];
 const store = new Vuex.Store({
   state: {
     showSpinner:false,
+    timer:0,
+    time:0,
     isLogin: isLogin,
     thisStudent: storedThisStudent,
     allStudents: storedAllStudents,
@@ -74,6 +76,12 @@ const store = new Vuex.Store({
       }
       localStorage.setItem("thisStudent", JSON.stringify(state.thisStudent));
     },
+    updateTime(state){
+      state.time +=1;
+    },
+    setNewTimmer(state){
+      state.time =0;
+    }
     
   },
   getters: {

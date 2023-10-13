@@ -60,6 +60,7 @@ export default {
           this.$store.commit("setThisStudent", [this.id, this.data]);
           this.$store.commit("login");
           this.$router.push('/');
+          this.$store.commit("updateTime")
 
         });
       }
