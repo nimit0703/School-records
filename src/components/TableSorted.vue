@@ -226,7 +226,7 @@ export default {
         {
           key: "percentage",
           label: "per",
-          sortable: true,
+          sortable: false,
           sortMethod: (a, b) => {
             a = parseFloat(a.replace("%", ""));
             b = parseFloat(b.replace("%", ""));
