@@ -114,9 +114,10 @@
         ></b-pagination>
       </b-col>
       <b-col sm="3" md="4" class="ml-5 my-2" style="opacity: 0.9">
-        <span class="bg-danger pl-3 pr-3 border text-white ml-2">Fail</span>
-        <span class="bg-success pl-3 pr-3 border text-white ml-2">Topper</span>
-        <span class="bg-primary pl-3 pr-3 border text-white ml-2">You</span>
+        <b-button-group>
+          <b-button variant="success" @click="showToppers">Topper</b-button>
+          <b-button variant="danger" @click="showFail">fail</b-button>
+        </b-button-group>
       </b-col>
     </b-row>
     <!-- Main table element -->
@@ -161,6 +162,9 @@
             </li>
           </ul>
         </b-card>
+      </template>
+      <template #cell(percentage)="row">
+        {{ calculatePercentage(row.item).toFixed(2) }}%
       </template>
     </b-table>
 
@@ -219,6 +223,16 @@ export default {
           label: "SoftwareEngineering",
           sortable: true,
         },
+        {
+          key: "percentage",
+          label: "per",
+          sortable: true,
+          sortMethod: (a, b) => {
+            a = parseFloat(a.replace("%", ""));
+            b = parseFloat(b.replace("%", ""));
+            return a - b;
+          },
+        },
       ],
       totalRows: 1,
       currentPage: 1,
@@ -261,8 +275,39 @@ export default {
           return { text: f.label, value: f.key };
         });
     },
+    calculatePercentage() {
+      return (item) => {
+        return this.$store.getters.getPercentageById(item.id);
+      };
+    },
   },
   methods: {
+    showToppers() {
+      // Filter the students to show only the toppers based on your criteria
+      // For example, you might filter by a minimum percentage score.
+      const minimumPercentage = 90; // Adjust this as needed.
+
+      this.items = this.$store.state.allStudents.filter((student) => {
+        return (
+          this.$store.getters.getPercentageById(student.id) >= minimumPercentage
+        );
+      });
+
+      // Update the total number of rows for pagination
+      this.totalRows = this.items.length;
+    },
+    showFail() {
+      const minimumPercentage = 35; // Adjust this as needed.
+
+      this.items = this.$store.state.allStudents.filter((student) => {
+        return (
+          this.$store.getters.getPercentageById(student.id) <= minimumPercentage
+        );
+      });
+
+      // Update the total number of rows for pagination
+      this.totalRows = this.items.length;
+    },
     rowClass(item) {
       const per = this.$store.getters.getPercentageById(item.id);
       if (per < 35) {
