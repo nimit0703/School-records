@@ -18,11 +18,11 @@
       </b-nav-item-dropdown>
       <b-nav-item tag="b-nav-item" to="logout">Logout</b-nav-item>
     </b-nav>
-    <div class="d-flex p-2 text-danger ml-2 text-center" style="width: auto; margin-top: 50vh;">
+    <div class="d-flex p-2 text-secondary ml-2 text-center" style="width: auto; margin-top: 50vh;" ref="timer">
       <span class="small">expires: </span>
       <transition name="fade" mode="out-in">
-        <span class="text-center ml-1 small"  :key="timeKey">
-          {{ 30 - displayTime }}</span
+        <span class="text-center ml-1 small"  :key="time">
+          {{ 5 - time}}</span
         >
       </transition>
       <span class="small">m</span>
@@ -32,23 +32,32 @@
 
 <script>
 export default {
-  data() {
-    return {
-      timeKey: 0,
-    };
-  },
   computed: {
-    displayTime() {
-      return this.$store.state.time; // Use a computed property for display
+    time() {
+      return this.$store.state.time; 
     },
   },
-  watch: {
-    displayTime: function (newTime, oldTime) {
-      // Update the time key to trigger the transition
-      this.timeKey++;
-    },
-  },
-  methods: {},
+  watch:{
+    time(newTime,oldTime){
+      if(newTime>2){
+        const ele = this.$refs.timer;
+        console.warn("session worning 2 min left")
+        ele.classList.remove('text-secondary');
+        ele.classList.add('text-warning');
+      }
+      if(newTime>4){
+        const ele = this.$refs.timer;
+        console.warn("session alert 1 min left")
+        
+        ele.classList.remove('text-warning');
+        ele.classList.add('text-danger');
+      }
+      if(newTime === 5){
+        console.warn("session over");
+        this.$router.push("/logout");
+      }
+    }
+  }
 };
 </script>
 

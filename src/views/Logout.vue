@@ -5,8 +5,16 @@
 export default {
   mounted() {
     console.log("logout mounted")
-    this.$store.commit("logout");
-    this.$router.push("/login");
+    this.$store.state.showSpinner = true;
+
+    setTimeout(() => {
+      this.$store.state.showSpinner = false;
+      this.$store.commit("logout");
+      this.$router.push("/login");
+    }, 700);
+  },
+  beforeDestroy() {
+    console.log("Logout before destroy");
   },
   destroyed(){
     console.log("logout distroyed")
